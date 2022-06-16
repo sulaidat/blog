@@ -1,0 +1,9 @@
+[vn]
+  title = "nqtuyen"
+  languageName = "Vietnamese"
+  weight = 1
+
+[en]
+  title = "nqtuyen"
+  languageName = "English"
+  weight = 2
