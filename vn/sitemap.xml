@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://sulaidat.github.io/blog/vn/categories/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://sulaidat.github.io/blog/categories/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="vn"
+                href="https://sulaidat.github.io/blog/vn/categories/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://sulaidat.github.io/blog/vn/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://sulaidat.github.io/blog/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="vn"
+                href="https://sulaidat.github.io/blog/vn/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://sulaidat.github.io/blog/vn/series/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://sulaidat.github.io/blog/series/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="vn"
+                href="https://sulaidat.github.io/blog/vn/series/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://sulaidat.github.io/blog/vn/tags/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://sulaidat.github.io/blog/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="vn"
+                href="https://sulaidat.github.io/blog/vn/tags/"
+                />
+  </url>
+  
+</urlset>

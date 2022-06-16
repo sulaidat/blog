@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://sulaidat.github.io/blog/</loc>
+    <lastmod>2022-06-15T23:47:32+07:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="vn"
+                href="https://sulaidat.github.io/blog/vn/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://sulaidat.github.io/blog/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://sulaidat.github.io/blog/tags/1/</loc>
+    <lastmod>2022-06-15T23:47:32+07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sulaidat.github.io/blog/tags/2/</loc>
+    <lastmod>2022-06-15T23:47:32+07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sulaidat.github.io/blog/posts/</loc>
+    <lastmod>2022-06-15T23:47:32+07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sulaidat.github.io/blog/tags/</loc>
+    <lastmod>2022-06-15T23:47:32+07:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="vn"
+                href="https://sulaidat.github.io/blog/vn/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://sulaidat.github.io/blog/tags/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://sulaidat.github.io/blog/posts/test/</loc>
+    <lastmod>2022-06-15T23:47:32+07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sulaidat.github.io/blog/posts/2022-06-15-calert/</loc>
+    <lastmod>2022-06-15T20:11:09+07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sulaidat.github.io/blog/tags/canary/</loc>
+    <lastmod>2022-06-15T20:11:09+07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sulaidat.github.io/blog/tags/pwn/</loc>
+    <lastmod>2022-06-15T20:11:09+07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sulaidat.github.io/blog/tags/tls/</loc>
+    <lastmod>2022-06-15T20:11:09+07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sulaidat.github.io/blog/archive/</loc>
+    <lastmod>2019-10-19T11:44:14+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sulaidat.github.io/blog/about/</loc>
+    <lastmod>2019-10-09T11:44:14+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sulaidat.github.io/blog/categories/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="vn"
+                href="https://sulaidat.github.io/blog/vn/categories/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://sulaidat.github.io/blog/categories/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://sulaidat.github.io/blog/tags/index/</loc>
+  </url>
+  
+  <url>
+    <loc>https://sulaidat.github.io/blog/series/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="vn"
+                href="https://sulaidat.github.io/blog/vn/series/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://sulaidat.github.io/blog/series/"
+                />
+  </url>
+  
+</urlset>

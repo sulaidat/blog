@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" 
+  xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+  xmlns:dc="http://purl.org/dc/elements/1.1/" 
+  xmlns:atom="http://www.w3.org/2005/Atom" 
+  xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
+  xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>pwn on nqtuyen</title>
+    <link>https://sulaidat.github.io/blog/tags/pwn/</link>
+    <description>Recent content in pwn on nqtuyen</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <managingEditor>tuyenvx.lqd@gmail.com (Nguyen Quang Tuyen)</managingEditor>
+    <webMaster>tuyenvx.lqd@gmail.com (Nguyen Quang Tuyen)</webMaster>
+    <copyright>©2022, All Rights Reserved</copyright>
+    <lastBuildDate>Wed, 15 Jun 2022 20:11:09 +0700</lastBuildDate>
+    
+        <atom:link href="https://sulaidat.github.io/blog/tags/pwn/index.xml" rel="self" type="application/rss+xml" />
+    
+
+      
+      <item>
+        <title>calert - HCMUS CTF 2022</title>
+        <link>https://sulaidat.github.io/blog/posts/2022-06-15-calert/</link>
+        <pubDate>Wed, 15 Jun 2022 20:11:09 +0700</pubDate>
+        <author>tuyenvx.lqd@gmail.com (Nguyen Quang Tuyen)</author>
+        <atom:modified>Wed, 15 Jun 2022 20:11:09 +0700</atom:modified>
+        <guid>https://sulaidat.github.io/blog/posts/2022-06-15-calert/</guid>
+        <description>Sau giải author hint đọc về &amp;ldquo;Thread Local Storage&amp;rdquo; nên t giải lại.
+Chương trình chạy 2 thead, một cái là routine chính cái còn lại để alert timeout
+1 2 3 4 5 6 7 8 9 10 11 12 13  void __fastcall __noreturn main(__int64 a1, char **a2, char **a3) { pthread_t newthread; // [rsp+0h] [rbp-20h] BYREF  pthread_t v4[3]; // [rsp+8h] [rbp-18h] BYREF  v4[2] = __readfsqword(0x28u); sub_5567A28DB5BB(); sem_init(&amp;amp;sem, 0, 0); pthread_create(&amp;amp;newthread, 0LL, (void *(*)(void *))start_routine, 0LL); pthread_create(v4, 0LL, (void *(*)(void *))sub_5567A28DB2A9, (void *)0x96); sem_wait(&amp;amp;sem); exit(0); }   Trong main routine, do sai lầm trong cast biến int thành usigned int của hàm read_buf dẫn đến một cái buffer overflow khổng lồ.</description>
+        
+        <dc:creator>Nguyen Quang Tuyen</dc:creator>
+        
+        
+        
+        
+          
+            
+              <category>pwn</category>
+            
+          
+            
+              <category>tls</category>
+            
+          
+            
+              <category>canary</category>
+            
+          
+        
+        
+        
+      </item>
+      
+
+    
+  </channel>
+</rss>
