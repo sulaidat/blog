@@ -18,17 +18,18 @@
   </url>
   
   <url>
+    <loc>https://sulaidat.github.io/blog/posts/</loc>
+    <lastmod>2022-06-15T23:47:32+07:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://sulaidat.github.io/blog/tags/1/</loc>
     <lastmod>2022-06-15T23:47:32+07:00</lastmod>
   </url>
   
   <url>
     <loc>https://sulaidat.github.io/blog/tags/2/</loc>
-    <lastmod>2022-06-15T23:47:32+07:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://sulaidat.github.io/blog/posts/</loc>
     <lastmod>2022-06-15T23:47:32+07:00</lastmod>
   </url>
   
@@ -74,10 +75,6 @@
                 hreflang="en"
                 href="https://sulaidat.github.io/blog/categories/"
                 />
-  </url>
-  
-  <url>
-    <loc>https://sulaidat.github.io/blog/tags/index/</loc>
   </url>
   
   <url>
