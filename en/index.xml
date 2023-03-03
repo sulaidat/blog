@@ -7,7 +7,7 @@
   xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
     <title>nqt</title>
-    <link>https://sulaidat.github.io/blog/en/</link>
+    <link>sulaidat.github.io/blog/en/</link>
     <description>Recent content on nqt</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
@@ -16,7 +16,7 @@
     <copyright>©2023, All Rights Reserved</copyright>
     <lastBuildDate>Tue, 28 Feb 2023 20:44:23 +0700</lastBuildDate>
     
-        <atom:link href="https://sulaidat.github.io/blog/en/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="sulaidat.github.io/blog/en/index.xml" rel="self" type="application/rss+xml" />
     
       
       
@@ -43,11 +43,11 @@
       
       <item>
         <title>ACSC 2023 writeup (re)</title>
-        <link>https://sulaidat.github.io/blog/en/posts/2023-44-28-acsc2023/</link>
+        <link>sulaidat.github.io/blog/en/posts/2023-44-28-acsc2023/</link>
         <pubDate>Tue, 28 Feb 2023 20:44:23 +0700</pubDate>
         <author>tuyenvx.lqd@gmail.com (nqt)</author>
         <atom:modified>Tue, 28 Feb 2023 20:44:23 +0700</atom:modified>
-        <guid>https://sulaidat.github.io/blog/en/posts/2023-44-28-acsc2023/</guid>
+        <guid>sulaidat.github.io/blog/en/posts/2023-44-28-acsc2023/</guid>
         <description>[pwn 300] re authored by shift-crops
 Sometimes you want to rewrite notes.
 Given files:
@@ -70,15 +70,15 @@ I didn&amp;rsquo;t manage to solve this challenge during contest but I&amp;rsquo
       
       <item>
         <title>Markdown Syntax Guide</title>
-        <link>https://sulaidat.github.io/blog/en/posts/markdown-syntax/</link>
+        <link>sulaidat.github.io/blog/en/posts/markdown-syntax/</link>
         <pubDate>Fri, 20 Dec 2019 12:00:06 +0900</pubDate>
         <author>tuyenvx.lqd@gmail.com (nqt)</author>
         <atom:modified>Fri, 20 Dec 2019 12:00:06 +0900</atom:modified>
-        <guid>https://sulaidat.github.io/blog/en/posts/markdown-syntax/</guid>
+        <guid>sulaidat.github.io/blog/en/posts/markdown-syntax/</guid>
         <description>&lt;p&gt;This article offers a sample of basic Markdown syntax that can be used in Hugo content files, also it shows whether basic HTML elements are decorated with CSS in a Hugo theme.&lt;/p&gt;</description>
         
         <dc:creator>Choi</dc:creator>
-        <media:content url="https://sulaidat.github.io/blog/images/feature1/markdown.png" medium="image"><media:title type="html">featured image</media:title></media:content>
+        <media:content url="sulaidat.github.io/blog/images/feature1/markdown.png" medium="image"><media:title type="html">featured image</media:title></media:content>
         
         
         

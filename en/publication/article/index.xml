@@ -7,7 +7,7 @@
   xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
     <title>article on nqt</title>
-    <link>https://sulaidat.github.io/blog/en/publication/article/</link>
+    <link>sulaidat.github.io/blog/en/publication/article/</link>
     <description>Recent content in article on nqt</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
@@ -16,17 +16,17 @@
     <copyright>©2023, All Rights Reserved</copyright>
     <lastBuildDate>Thu, 05 Mar 2020 14:08:48 +0000</lastBuildDate>
     
-        <atom:link href="https://sulaidat.github.io/blog/en/publication/article/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="sulaidat.github.io/blog/en/publication/article/index.xml" rel="self" type="application/rss+xml" />
     
 
       
       <item>
         <title>Good Title</title>
-        <link>https://sulaidat.github.io/blog/en/publication/article/article_any_folder_name_1/</link>
+        <link>sulaidat.github.io/blog/en/publication/article/article_any_folder_name_1/</link>
         <pubDate>Fri, 01 Jun 2018 00:00:00 +0000</pubDate>
         <author>tuyenvx.lqd@gmail.com (nqt)</author>
         <atom:modified>Fri, 01 Jun 2018 00:00:00 +0000</atom:modified>
-        <guid>https://sulaidat.github.io/blog/en/publication/article/article_any_folder_name_1/</guid>
+        <guid>sulaidat.github.io/blog/en/publication/article/article_any_folder_name_1/</guid>
         <description></description>
         
         <dc:creator>nqt</dc:creator>

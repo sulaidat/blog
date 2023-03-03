@@ -7,7 +7,7 @@
   xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
     <title>index on nqt</title>
-    <link>https://sulaidat.github.io/blog/en/tags/index/</link>
+    <link>sulaidat.github.io/blog/en/tags/index/</link>
     <description>Recent content in index on nqt</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
@@ -15,17 +15,17 @@
     <webMaster>tuyenvx.lqd@gmail.com (nqt)</webMaster>
     <copyright>©2023, All Rights Reserved</copyright>
     
-        <atom:link href="https://sulaidat.github.io/blog/en/tags/index/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="sulaidat.github.io/blog/en/tags/index/index.xml" rel="self" type="application/rss+xml" />
     
 
       
       <item>
         <title>Posts</title>
-        <link>https://sulaidat.github.io/blog/en/posts/</link>
+        <link>sulaidat.github.io/blog/en/posts/</link>
         <pubDate>Tue, 28 Feb 2023 20:44:23 +0700</pubDate>
         <author>tuyenvx.lqd@gmail.com (nqt)</author>
         
-        <guid>https://sulaidat.github.io/blog/en/posts/</guid>
+        <guid>sulaidat.github.io/blog/en/posts/</guid>
         <description></description>
         
         <dc:creator>nqt</dc:creator>
