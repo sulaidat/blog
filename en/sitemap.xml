@@ -2,66 +2,66 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>/en/posts/2023-44-28-acsc2023/</loc>
+    <loc>https://sulaidat.github.io/blog/en/posts/2023-44-28-acsc2023/</loc>
     <lastmod>2023-02-28T20:44:23+07:00</lastmod>
   </url><url>
-    <loc>/en/</loc>
-    <lastmod>2023-02-28T20:44:23+07:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="vi"
-                href="/vi/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/en/"
-                />
-  </url><url>
-    <loc>/en/posts/</loc>
-    <lastmod>2023-02-28T20:44:23+07:00</lastmod>
-  </url><url>
-    <loc>/en/tags/pwn/</loc>
-    <lastmod>2023-02-28T20:44:23+07:00</lastmod>
-  </url><url>
-    <loc>/en/tags/</loc>
+    <loc>https://sulaidat.github.io/blog/en/</loc>
     <lastmod>2023-02-28T20:44:23+07:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="/vi/tags/"
+                href="https://sulaidat.github.io/blog/vi/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/en/tags/"
+                href="https://sulaidat.github.io/blog/en/"
                 />
   </url><url>
-    <loc>/en/archive/</loc>
+    <loc>https://sulaidat.github.io/blog/en/posts/</loc>
+    <lastmod>2023-02-28T20:44:23+07:00</lastmod>
+  </url><url>
+    <loc>https://sulaidat.github.io/blog/en/tags/pwn/</loc>
+    <lastmod>2023-02-28T20:44:23+07:00</lastmod>
+  </url><url>
+    <loc>https://sulaidat.github.io/blog/en/tags/</loc>
+    <lastmod>2023-02-28T20:44:23+07:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="https://sulaidat.github.io/blog/vi/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://sulaidat.github.io/blog/en/tags/"
+                />
+  </url><url>
+    <loc>https://sulaidat.github.io/blog/en/archive/</loc>
     <lastmod>2019-10-19T11:44:14+09:00</lastmod>
   </url><url>
-    <loc>/en/categories/</loc>
+    <loc>https://sulaidat.github.io/blog/en/categories/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="/vi/categories/"
+                href="https://sulaidat.github.io/blog/vi/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/en/categories/"
+                href="https://sulaidat.github.io/blog/en/categories/"
                 />
   </url><url>
-    <loc>/en/series/</loc>
+    <loc>https://sulaidat.github.io/blog/en/series/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="/vi/series/"
+                href="https://sulaidat.github.io/blog/vi/series/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/en/series/"
+                href="https://sulaidat.github.io/blog/en/series/"
                 />
   </url>
 </urlset>

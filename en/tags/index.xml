@@ -7,7 +7,7 @@
   xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
     <title>Tags on nqt</title>
-    <link>/en/tags/</link>
+    <link>https://sulaidat.github.io/blog/en/tags/</link>
     <description>Recent content in Tags on nqt</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
@@ -16,17 +16,17 @@
     <copyright>©2023, All Rights Reserved</copyright>
     <lastBuildDate>Tue, 28 Feb 2023 20:44:23 +0700</lastBuildDate>
     
-        <atom:link href="/en/tags/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://sulaidat.github.io/blog/en/tags/index.xml" rel="self" type="application/rss+xml" />
     
 
       
       <item>
         <title>pwn</title>
-        <link>/en/tags/pwn/</link>
+        <link>https://sulaidat.github.io/blog/en/tags/pwn/</link>
         <pubDate>Tue, 28 Feb 2023 20:44:23 +0700</pubDate>
         <author>tuyenvx.lqd@gmail.com (nqt)</author>
         
-        <guid>/en/tags/pwn/</guid>
+        <guid>https://sulaidat.github.io/blog/en/tags/pwn/</guid>
         <description></description>
         
         <dc:creator>nqt</dc:creator>
