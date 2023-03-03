@@ -2,112 +2,112 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>/ko/</loc>
+    <loc>https://sulaidat.github.io/blog/ko/</loc>
     <lastmod>2019-10-19T11:44:14+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/en/"
+                href="https://sulaidat.github.io/blog/en/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ko"
-                href="/ko/"
+                href="https://sulaidat.github.io/blog/ko/"
                 />
   </url><url>
-    <loc>/ko/archive/</loc>
+    <loc>https://sulaidat.github.io/blog/ko/archive/</loc>
     <lastmod>2019-10-19T11:44:14+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/en/archive/"
+                href="https://sulaidat.github.io/blog/en/archive/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ko"
-                href="/ko/archive/"
+                href="https://sulaidat.github.io/blog/ko/archive/"
                 />
   </url><url>
-    <loc>/ko/about/</loc>
+    <loc>https://sulaidat.github.io/blog/ko/about/</loc>
     <lastmod>2019-10-09T11:44:14+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/en/about/"
+                href="https://sulaidat.github.io/blog/en/about/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ko"
-                href="/ko/about/"
+                href="https://sulaidat.github.io/blog/ko/about/"
                 />
   </url><url>
-    <loc>/ko/gallery/</loc>
+    <loc>https://sulaidat.github.io/blog/ko/gallery/</loc>
     <lastmod>2018-10-12T10:20:16+09:00</lastmod>
   </url><url>
-    <loc>/ko/gallery/photo/</loc>
+    <loc>https://sulaidat.github.io/blog/ko/gallery/photo/</loc>
     <lastmod>2018-10-12T10:20:16+09:00</lastmod>
   </url><url>
-    <loc>/ko/gallery/cartoon/</loc>
+    <loc>https://sulaidat.github.io/blog/ko/gallery/cartoon/</loc>
     <lastmod>2018-10-11T10:20:16+09:00</lastmod>
   </url><url>
-    <loc>/ko/categories/</loc>
+    <loc>https://sulaidat.github.io/blog/ko/categories/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/en/categories/"
+                href="https://sulaidat.github.io/blog/en/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ko"
-                href="/ko/categories/"
+                href="https://sulaidat.github.io/blog/ko/categories/"
                 />
   </url><url>
-    <loc>/ko/tags/index/</loc>
+    <loc>https://sulaidat.github.io/blog/ko/tags/index/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/en/tags/index/"
+                href="https://sulaidat.github.io/blog/en/tags/index/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ko"
-                href="/ko/tags/index/"
+                href="https://sulaidat.github.io/blog/ko/tags/index/"
                 />
   </url><url>
-    <loc>/ko/posts/</loc>
+    <loc>https://sulaidat.github.io/blog/ko/posts/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/en/posts/"
+                href="https://sulaidat.github.io/blog/en/posts/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ko"
-                href="/ko/posts/"
+                href="https://sulaidat.github.io/blog/ko/posts/"
                 />
   </url><url>
-    <loc>/ko/series/</loc>
+    <loc>https://sulaidat.github.io/blog/ko/series/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/en/series/"
+                href="https://sulaidat.github.io/blog/en/series/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ko"
-                href="/ko/series/"
+                href="https://sulaidat.github.io/blog/ko/series/"
                 />
   </url><url>
-    <loc>/ko/tags/</loc>
+    <loc>https://sulaidat.github.io/blog/ko/tags/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/en/tags/"
+                href="https://sulaidat.github.io/blog/en/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ko"
-                href="/ko/tags/"
+                href="https://sulaidat.github.io/blog/ko/tags/"
                 />
   </url>
 </urlset>

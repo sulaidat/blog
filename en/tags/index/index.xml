@@ -6,26 +6,26 @@
   xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
   xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
-    <title>index on Hugo Zzo Theme</title>
-    <link>/en/tags/index/</link>
-    <description>Recent content in index on Hugo Zzo Theme</description>
+    <title>index on nqt</title>
+    <link>https://sulaidat.github.io/blog/en/tags/index/</link>
+    <description>Recent content in index on nqt</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <managingEditor>tuyenvx.lqd@gmail.com (nqt)</managingEditor>
     <webMaster>tuyenvx.lqd@gmail.com (nqt)</webMaster>
     <copyright>©2023, All Rights Reserved</copyright>
     
-        <atom:link href="/en/tags/index/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://sulaidat.github.io/blog/en/tags/index/index.xml" rel="self" type="application/rss+xml" />
     
 
       
       <item>
         <title>Posts</title>
-        <link>/en/posts/</link>
+        <link>https://sulaidat.github.io/blog/en/posts/</link>
         <pubDate>Tue, 28 Feb 2023 20:44:23 +0700</pubDate>
         <author>tuyenvx.lqd@gmail.com (nqt)</author>
         
-        <guid>/en/posts/</guid>
+        <guid>https://sulaidat.github.io/blog/en/posts/</guid>
         <description></description>
         
         <dc:creator>nqt</dc:creator>

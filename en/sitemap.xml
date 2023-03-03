@@ -2,185 +2,185 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>/en/showcase/hugo/hugo-theme-zzo/</loc>
+    <loc>https://sulaidat.github.io/blog/en/showcase/hugo/hugo-theme-zzo/</loc>
     <lastmod>2020-01-19T21:13:42+09:00</lastmod>
   </url><url>
-    <loc>/en/showcase/hugo/hugo-theme-zdoc/</loc>
+    <loc>https://sulaidat.github.io/blog/en/showcase/hugo/hugo-theme-zdoc/</loc>
     <lastmod>2020-01-19T21:13:42+09:00</lastmod>
   </url><url>
-    <loc>/en/</loc>
+    <loc>https://sulaidat.github.io/blog/en/</loc>
     <lastmod>2023-02-28T20:44:23+07:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="ko"
-                href="/ko/"
+                href="https://sulaidat.github.io/blog/ko/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/en/"
+                href="https://sulaidat.github.io/blog/en/"
                 />
   </url><url>
-    <loc>/en/posts/2023-44-28-acsc2023/</loc>
+    <loc>https://sulaidat.github.io/blog/en/posts/2023-44-28-acsc2023/</loc>
     <lastmod>2023-02-28T20:44:23+07:00</lastmod>
   </url><url>
-    <loc>/en/posts/</loc>
+    <loc>https://sulaidat.github.io/blog/en/posts/</loc>
     <lastmod>2023-02-28T20:44:23+07:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="ko"
-                href="/ko/posts/"
+                href="https://sulaidat.github.io/blog/ko/posts/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/en/posts/"
+                href="https://sulaidat.github.io/blog/en/posts/"
                 />
   </url><url>
-    <loc>/en/tags/pwn/</loc>
+    <loc>https://sulaidat.github.io/blog/en/tags/pwn/</loc>
     <lastmod>2023-02-28T20:44:23+07:00</lastmod>
   </url><url>
-    <loc>/en/tags/</loc>
+    <loc>https://sulaidat.github.io/blog/en/tags/</loc>
     <lastmod>2023-02-28T20:44:23+07:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="ko"
-                href="/ko/tags/"
+                href="https://sulaidat.github.io/blog/ko/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/en/tags/"
+                href="https://sulaidat.github.io/blog/en/tags/"
                 />
   </url><url>
-    <loc>/en/publication/article/</loc>
+    <loc>https://sulaidat.github.io/blog/en/publication/article/</loc>
     <lastmod>2020-03-05T14:08:48+00:00</lastmod>
   </url><url>
-    <loc>/en/publication/book/</loc>
+    <loc>https://sulaidat.github.io/blog/en/publication/book/</loc>
     <lastmod>2020-03-05T14:08:48+00:00</lastmod>
   </url><url>
-    <loc>/en/publication/misc/</loc>
+    <loc>https://sulaidat.github.io/blog/en/publication/misc/</loc>
     <lastmod>2020-03-05T14:08:48+00:00</lastmod>
   </url><url>
-    <loc>/en/publication/</loc>
+    <loc>https://sulaidat.github.io/blog/en/publication/</loc>
     <lastmod>2020-03-05T14:08:48+00:00</lastmod>
   </url><url>
-    <loc>/en/showcase/hugo/</loc>
+    <loc>https://sulaidat.github.io/blog/en/showcase/hugo/</loc>
     <lastmod>2020-01-19T21:04:11+09:00</lastmod>
   </url><url>
-    <loc>/en/showcase/</loc>
+    <loc>https://sulaidat.github.io/blog/en/showcase/</loc>
     <lastmod>2020-01-19T15:43:38+09:00</lastmod>
   </url><url>
-    <loc>/en/categories/</loc>
+    <loc>https://sulaidat.github.io/blog/en/categories/</loc>
     <lastmod>2019-12-20T12:00:06+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="ko"
-                href="/ko/categories/"
+                href="https://sulaidat.github.io/blog/ko/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/en/categories/"
+                href="https://sulaidat.github.io/blog/en/categories/"
                 />
   </url><url>
-    <loc>/en/tags/css/</loc>
+    <loc>https://sulaidat.github.io/blog/en/tags/css/</loc>
     <lastmod>2019-12-20T12:00:06+09:00</lastmod>
   </url><url>
-    <loc>/en/tags/html/</loc>
+    <loc>https://sulaidat.github.io/blog/en/tags/html/</loc>
     <lastmod>2019-12-20T12:00:06+09:00</lastmod>
   </url><url>
-    <loc>/en/tags/markdown/</loc>
+    <loc>https://sulaidat.github.io/blog/en/tags/markdown/</loc>
     <lastmod>2019-12-20T12:00:06+09:00</lastmod>
   </url><url>
-    <loc>/en/posts/markdown-syntax/</loc>
+    <loc>https://sulaidat.github.io/blog/en/posts/markdown-syntax/</loc>
     <lastmod>2019-12-20T12:00:06+09:00</lastmod>
   </url><url>
-    <loc>/en/series/</loc>
+    <loc>https://sulaidat.github.io/blog/en/series/</loc>
     <lastmod>2019-12-20T12:00:06+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="ko"
-                href="/ko/series/"
+                href="https://sulaidat.github.io/blog/ko/series/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/en/series/"
+                href="https://sulaidat.github.io/blog/en/series/"
                 />
   </url><url>
-    <loc>/en/categories/syntax/</loc>
+    <loc>https://sulaidat.github.io/blog/en/categories/syntax/</loc>
     <lastmod>2019-12-20T12:00:06+09:00</lastmod>
   </url><url>
-    <loc>/en/tags/themes/</loc>
+    <loc>https://sulaidat.github.io/blog/en/tags/themes/</loc>
     <lastmod>2019-12-20T12:00:06+09:00</lastmod>
   </url><url>
-    <loc>/en/categories/themes/</loc>
+    <loc>https://sulaidat.github.io/blog/en/categories/themes/</loc>
     <lastmod>2019-12-20T12:00:06+09:00</lastmod>
   </url><url>
-    <loc>/en/series/themes-guide/</loc>
+    <loc>https://sulaidat.github.io/blog/en/series/themes-guide/</loc>
     <lastmod>2019-12-20T12:00:06+09:00</lastmod>
   </url><url>
-    <loc>/en/presentation/dir/fourth/</loc>
+    <loc>https://sulaidat.github.io/blog/en/presentation/dir/fourth/</loc>
     <lastmod>2019-10-30T20:48:10+09:00</lastmod>
   </url><url>
-    <loc>/en/presentation/</loc>
+    <loc>https://sulaidat.github.io/blog/en/presentation/</loc>
     <lastmod>2019-10-30T20:48:10+09:00</lastmod>
   </url><url>
-    <loc>/en/presentation/third/</loc>
+    <loc>https://sulaidat.github.io/blog/en/presentation/third/</loc>
     <lastmod>2019-10-30T20:46:30+09:00</lastmod>
   </url><url>
-    <loc>/en/presentation/second/</loc>
+    <loc>https://sulaidat.github.io/blog/en/presentation/second/</loc>
     <lastmod>2019-10-30T20:45:24+09:00</lastmod>
   </url><url>
-    <loc>/en/presentation/first/</loc>
+    <loc>https://sulaidat.github.io/blog/en/presentation/first/</loc>
     <lastmod>2019-10-30T19:45:20+09:00</lastmod>
   </url><url>
-    <loc>/en/archive/</loc>
+    <loc>https://sulaidat.github.io/blog/en/archive/</loc>
     <lastmod>2019-10-19T11:44:14+09:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="ko"
-                href="/ko/archive/"
+                href="https://sulaidat.github.io/blog/ko/archive/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/en/archive/"
+                href="https://sulaidat.github.io/blog/en/archive/"
                 />
   </url><url>
-    <loc>/en/about/</loc>
+    <loc>https://sulaidat.github.io/blog/en/about/</loc>
     <lastmod>2019-02-28T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="ko"
-                href="/ko/about/"
+                href="https://sulaidat.github.io/blog/ko/about/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/en/about/"
+                href="https://sulaidat.github.io/blog/en/about/"
                 />
   </url><url>
-    <loc>/en/publication/article/article_any_folder_name_1/</loc>
+    <loc>https://sulaidat.github.io/blog/en/publication/article/article_any_folder_name_1/</loc>
     <lastmod>2018-06-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/en/publication/book/book_any_folder_name_1/</loc>
+    <loc>https://sulaidat.github.io/blog/en/publication/book/book_any_folder_name_1/</loc>
     <lastmod>2017-06-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/en/publication/misc/misc_any_folder_name_1/</loc>
+    <loc>https://sulaidat.github.io/blog/en/publication/misc/misc_any_folder_name_1/</loc>
     <lastmod>2016-11-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/en/tags/index/</loc>
+    <loc>https://sulaidat.github.io/blog/en/tags/index/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="ko"
-                href="/ko/tags/index/"
+                href="https://sulaidat.github.io/blog/ko/tags/index/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/en/tags/index/"
+                href="https://sulaidat.github.io/blog/en/tags/index/"
                 />
   </url>
 </urlset>
