@@ -6,16 +6,16 @@
   xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
   xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
-    <title>Series on nqt</title>
-    <link>/en/series/</link>
-    <description>Recent content in Series on nqt</description>
+    <title>Tags on nqt</title>
+    <link>/vi/tags/</link>
+    <description>Recent content in Tags on nqt</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
+    <language>vi</language>
     <managingEditor>tuyenvx.lqd@gmail.com (nqt)</managingEditor>
     <webMaster>tuyenvx.lqd@gmail.com (nqt)</webMaster>
     <copyright>©2023, All Rights Reserved</copyright>
     
-        <atom:link href="/en/series/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="/vi/tags/index.xml" rel="self" type="application/rss+xml" />
     
 
       
