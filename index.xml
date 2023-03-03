@@ -7,7 +7,7 @@
   xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
     <title>nqt</title>
-    <link>/</link>
+    <link>https://sulaidat.github.io/blog/</link>
     <description>Recent content on nqt</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
@@ -16,7 +16,7 @@
     <copyright>©2023, All Rights Reserved</copyright>
     <lastBuildDate>Tue, 28 Feb 2023 20:44:23 +0700</lastBuildDate>
     
-        <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://sulaidat.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
     
       
       
@@ -43,11 +43,11 @@
       
       <item>
         <title>ACSC 2023 writeup: re</title>
-        <link>/posts/2023-44-28-acsc2023/</link>
+        <link>https://sulaidat.github.io/blog/posts/2023-44-28-acsc2023/</link>
         <pubDate>Tue, 28 Feb 2023 20:44:23 +0700</pubDate>
         <author>tuyenvx.lqd@gmail.com (nqt)</author>
         <atom:modified>Tue, 28 Feb 2023 20:44:23 +0700</atom:modified>
-        <guid>/posts/2023-44-28-acsc2023/</guid>
+        <guid>https://sulaidat.github.io/blog/posts/2023-44-28-acsc2023/</guid>
         <description>[pwn 300] re authored by shift-crops
 Sometimes you want to rewrite notes.
 Given files:
