@@ -2,52 +2,52 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://sulaidat.github.io/blog/vi/categories/</loc>
+    <loc>/vi/categories/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://sulaidat.github.io/blog/categories/"
+                href="/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="https://sulaidat.github.io/blog/vi/categories/"
+                href="/vi/categories/"
                 />
   </url><url>
-    <loc>https://sulaidat.github.io/blog/vi/</loc>
+    <loc>/vi/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://sulaidat.github.io/blog/"
+                href="/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="https://sulaidat.github.io/blog/vi/"
+                href="/vi/"
                 />
   </url><url>
-    <loc>https://sulaidat.github.io/blog/vi/series/</loc>
+    <loc>/vi/series/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://sulaidat.github.io/blog/series/"
+                href="/series/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="https://sulaidat.github.io/blog/vi/series/"
+                href="/vi/series/"
                 />
   </url><url>
-    <loc>https://sulaidat.github.io/blog/vi/tags/</loc>
+    <loc>/vi/tags/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://sulaidat.github.io/blog/tags/"
+                href="/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="https://sulaidat.github.io/blog/vi/tags/"
+                href="/vi/tags/"
                 />
   </url>
 </urlset>
