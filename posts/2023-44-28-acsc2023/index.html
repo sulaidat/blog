@@ -1896,7 +1896,7 @@ Given files:</p>
 </div>
   </div>
 </div>
-<p>It&rsquo;s a typical note challenge structure. We have an array of 10 notes of size 0-0x78. We can edit or show note&rsquo;s content. <code>edit()</code> is more noticable that implemented using <code>realloc()</code>, and input <code>size</code> can be 0 so we <code>free()</code> chunk, but pointer is not cleared after <code>free()</code>. So in summary we can use <code>edit()</code> to:</p>
+<p>We have an array of 10 notes of size 0-0x78. We can edit or show note&rsquo;s content. <code>edit()</code> is more noticable that implemented using <code>realloc()</code>, and input <code>size</code> can be 0 so we can <code>free()</code> chunk of the note, but pointer is not cleared from note after <code>free()</code>. So in summary we can use <code>edit()</code> to:</p>
 <ul>
 <li>Allocate new chunk for empty note</li>
 <li>Allocate new bigger chunk for smaller note.</li>
@@ -1926,8 +1926,8 @@ Given files:</p>
 </div><h2 id="glibc-232s-safe-linking">Glibc-2.32&rsquo;s Safe Linking</h2>
 <p><a href="https://research.checkpoint.com/2020/safe-linking-eliminating-a-20-year-old-malloc-exploit-primitive/">https://research.checkpoint.com/2020/safe-linking-eliminating-a-20-year-old-malloc-exploit-primitive/</a></p>
 <p>Note that what we leaked is an encrypted form of chunk&rsquo;s fd:</p>
-<pre tabindex="0"><code>gdb
-</code></pre><p>This is because of glibc-2.32&rsquo;s safe linking.</p>
+<p><img src="/images/2023-44-28-acsc2023/image-20230303151312778.png" alt="image-20230303151300741" /></p>
+<p>This is because of glibc-2.32&rsquo;s safe linking.</p>
 <p>Safe linking is a security mechanism to protect <code>malloc()</code>&rsquo;s single-linked lists from tampering by attacker.</p>
 <p>In this case we encounter this protection when allocate and free tcache chunk</p>
 <div class="highlight"><div class="chroma">
