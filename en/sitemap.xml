@@ -2,10 +2,10 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://sulaidat.github.io/blog/en/posts/2023-44-28-acsc2023/</loc>
+    <loc>https://sulaidat.github.io/blog/posts/2023-44-28-acsc2023/</loc>
     <lastmod>2023-02-28T20:44:23+07:00</lastmod>
   </url><url>
-    <loc>https://sulaidat.github.io/blog/en/</loc>
+    <loc>https://sulaidat.github.io/blog/</loc>
     <lastmod>2023-02-28T20:44:23+07:00</lastmod>
     <xhtml:link
                 rel="alternate"
@@ -15,16 +15,16 @@
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://sulaidat.github.io/blog/en/"
+                href="https://sulaidat.github.io/blog/"
                 />
   </url><url>
-    <loc>https://sulaidat.github.io/blog/en/posts/</loc>
+    <loc>https://sulaidat.github.io/blog/posts/</loc>
     <lastmod>2023-02-28T20:44:23+07:00</lastmod>
   </url><url>
-    <loc>https://sulaidat.github.io/blog/en/tags/pwn/</loc>
+    <loc>https://sulaidat.github.io/blog/tags/pwn/</loc>
     <lastmod>2023-02-28T20:44:23+07:00</lastmod>
   </url><url>
-    <loc>https://sulaidat.github.io/blog/en/tags/</loc>
+    <loc>https://sulaidat.github.io/blog/tags/</loc>
     <lastmod>2023-02-28T20:44:23+07:00</lastmod>
     <xhtml:link
                 rel="alternate"
@@ -34,13 +34,13 @@
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://sulaidat.github.io/blog/en/tags/"
+                href="https://sulaidat.github.io/blog/tags/"
                 />
   </url><url>
-    <loc>https://sulaidat.github.io/blog/en/archive/</loc>
+    <loc>https://sulaidat.github.io/blog/archive/</loc>
     <lastmod>2019-10-19T11:44:14+09:00</lastmod>
   </url><url>
-    <loc>https://sulaidat.github.io/blog/en/categories/</loc>
+    <loc>https://sulaidat.github.io/blog/categories/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
@@ -49,10 +49,10 @@
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://sulaidat.github.io/blog/en/categories/"
+                href="https://sulaidat.github.io/blog/categories/"
                 />
   </url><url>
-    <loc>https://sulaidat.github.io/blog/en/series/</loc>
+    <loc>https://sulaidat.github.io/blog/series/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
@@ -61,7 +61,7 @@
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://sulaidat.github.io/blog/en/series/"
+                href="https://sulaidat.github.io/blog/series/"
                 />
   </url>
 </urlset>
